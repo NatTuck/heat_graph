@@ -17,10 +17,16 @@ defmodule HeatGraph.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    resources "/sensors",  SensorController
+    get "/sensors/:id/flot", SensorController, :flot
+
+    resources "/readings", ReadingController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", HeatGraph do
-  #   pipe_through :api
-  # end
+  scope "/api_v1", HeatGraph do
+    pipe_through :api
+
+    post "/reading", ReadingController, :create_api
+  end
 end

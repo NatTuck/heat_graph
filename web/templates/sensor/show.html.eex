@@ -1,0 +1,59 @@
+
+<h2>Fancy Graph</h2>
+
+<table class="table">
+  <tr>
+    <td>
+      <strong>User:</strong><br>
+      <%= @sensor.user_id %>
+    </td>
+    <td>
+      <strong>Name:</strong><br>
+      <%= @sensor.name %>
+    </td>
+
+    <td>
+      <strong>Desc:</strong><br>
+      <%= @sensor.desc %>
+    </td>
+  </tr>
+</table>
+
+<p>
+<%= link "Edit", to: sensor_path(@conn, :edit, @sensor) %>
+<%= link "Back", to: sensor_path(@conn, :index) %>
+</p>
+
+<div>
+  <div id="graph" style="width: 1024px; height: 768px;">
+  </div>
+</div>
+
+<script>
+  var data = [<%= raw(Poison.encode!(@data)) %>];
+
+  $(function() {
+    $.plot($('#graph'), data, {
+      series: {
+        lines: { show: true },
+        downsample: { threshold: 1000 },
+        shadowSize: 0,
+      },
+      xaxis: {
+        zoomRange: [120000, <%= @settings.xmax %>],
+        panRange: [<%= @settings.xmin %>, <%= @settings.xmax %>],
+        mode: "time",
+      },
+      yaxis: {
+        zoomRange: false,
+        panRange: false,
+      },
+      zoom: {
+        interactive: true
+      },
+      pan: {
+        interactive: true
+      }
+    });
+  });
+</script>

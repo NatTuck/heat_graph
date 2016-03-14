@@ -1,0 +1,23 @@
+<h2>Show reading</h2>
+
+<ul>
+
+  <li>
+    <strong>Sensor:</strong>
+    <%= @reading.sensor_id %>
+  </li>
+
+  <li>
+    <strong>Timestamp:</strong>
+    <%= @reading.timestamp %>
+  </li>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @reading.value %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: reading_path(@conn, :edit, @reading) %>
+<%= link "Back", to: reading_path(@conn, :index) %>

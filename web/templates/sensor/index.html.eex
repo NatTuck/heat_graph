@@ -1,0 +1,30 @@
+<h2>Listing sensors</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Desc</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for sensor <- @sensors do %>
+    <tr>
+      <td><%= sensor.user_id %></td>
+      <td><%= sensor.name %></td>
+      <td><%= sensor.desc %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: sensor_path(@conn, :show, sensor), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: sensor_path(@conn, :edit, sensor), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: sensor_path(@conn, :delete, sensor), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New sensor", to: sensor_path(@conn, :new) %>

@@ -1,0 +1,32 @@
+<h2>Listing readings</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sensor</th>
+      <th>Timestamp</th>
+      <th>Value (C)</th>
+      <th>Value (F)</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for reading <- @readings do %>
+    <tr>
+      <td><%= reading.sensor_id %></td>
+      <td><span class="date"><%= reading.timestamp %></span></td>
+      <td><%= reading.value %> °C</td>
+      <td><%= Float.round((reading.value * 9) / 5 + 32, 1) %> °F</td>
+
+      <td class="text-right">
+        <%= link "Show", to: reading_path(@conn, :show, reading), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: reading_path(@conn, :edit, reading), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: reading_path(@conn, :delete, reading), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New reading", to: reading_path(@conn, :new) %>

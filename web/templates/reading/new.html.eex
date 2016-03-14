@@ -1,0 +1,6 @@
+<h2>New reading</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: reading_path(@conn, :create) %>
+
+<%= link "Back", to: reading_path(@conn, :index) %>

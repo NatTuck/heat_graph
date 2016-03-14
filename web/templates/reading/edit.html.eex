@@ -1,0 +1,6 @@
+<h2>Edit reading</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: reading_path(@conn, :update, @reading) %>
+
+<%= link "Back", to: reading_path(@conn, :index) %>
